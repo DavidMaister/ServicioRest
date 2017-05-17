@@ -1,0 +1,25 @@
+<html>
+	<head>
+<script	type="text/javascript"	 
+	src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">
+	</script>
+</head>
+	<body>
+		<h2>Calcular factorial</h2>
+		Numero:<input	type="text"	name="base"	id="base"/>
+		<button	type="button"	id="calcularBtn">Calcular</button>
+		<div	id="resultado">
+			Resultado:	<span></span>
+		</div>
+		<script	type="text/javascript">
+			jQuery("#calcularBtn").click(function(){
+				var base =	jQuery("#base").val();
+			jQuery.get("http://localhost:8080/ServicioRest/webresources/factorial",{
+			num1:base
+			},function(resultado){
+				jQuery("#resultado span").text(resultado)
+			})
+		})
+		</script>
+	</body>
+</html>
