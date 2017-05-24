@@ -17,14 +17,25 @@ import javax.ws.rs.*;
 @Path("/factorial")
 public class FactorialResource {
     @GET
-    public String factorial(@QueryParam("num1") long base)	{
+    public String factorial(@QueryParam("num1") long base){
         return Long.toString($factorial(base));
     }
     
-    long $factorial(long base)	{
+    long $factorial(long base)  {
         if (base >= 1){
-        return $factorial(base - 1) * base;
+            return $factorial(base - 1) * base;
+        }
+        return 1;
     }
-    return 1;
+    
+    @GET
+    public String suma(@QueryParam("suma") long sumando){
+        return Long.toString($suma(sumando));
     }
+    
+    long $suma(long sumando)  {
+        return sumando + sumando;
+    }
+    
+    
 }
