@@ -5,9 +5,14 @@
  */
 package recursos;
 
+
+
 import javax.ejb.Stateless;
 import static javax.swing.text.html.FormSubmitEvent.MethodType.*;
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+
 
 /**
  *
@@ -19,12 +24,34 @@ import javax.ws.rs.*;
 public class LibroResource {
     
     Libro libro;
-    
+    @GET
+    @Produces(MediaType.APPLICATION_XML)
+    public Libro consultar(){
+        return libro;
+    }
+
     @POST
-    public String factorial(@QueryParam("titulo") String titulo,@QueryParam("autor") String autor, 
-            @QueryParam("año") int año, @QueryParam("editorial") String editorial){
-        libro = new Libro(titulo, autor, año, editorial);
+    @Consumes(MediaType.APPLICATION_XML)
+    public String añadir(Libro nuevoLibro){
+        libro = nuevoLibro;
+                    
         return "Datos guardados";
+    }
+    
+    
+    @PUT
+    @Consumes(MediaType.APPLICATION_XML)
+    public String modificar(Libro nuevoLibro){
+        libro = nuevoLibro;
+                    
+        return "Datos modificados";
+    }
+    
+    @DELETE
+    @Consumes(MediaType.APPLICATION_XML)
+    public String borrar(){
+        libro = null;
+        return "Borrado";
     }
     
     

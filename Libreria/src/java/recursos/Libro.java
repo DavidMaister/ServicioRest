@@ -24,7 +24,7 @@ public class Libro {
         titulo="La Biblia";
         autor="Yahvé";
         año = 0;
-        editorial = "El araca de Noe";
+        editorial = "El arca de Noe";
     }
     
     public Libro(String titulo_, String autor_, int año_, String editorial_){
@@ -34,23 +34,23 @@ public class Libro {
         editorial = editorial_;
     }
     
-    @XmlElement(name="titulo")
+   
     public String getTitulo(){
         return titulo;
     }
     
-    @XmlElement(name="autor")
+   
     public String getAutor(){
         return autor;
     }
     
-    @XmlElement(name="editorial")
+    
     public String getEditorial(){
         return editorial;
     }
     
     
-    @XmlElement(name="año")
+    
     public int getAño(){
         return año;
     }
@@ -76,7 +76,10 @@ public class Libro {
     }
     
     
-    
+    public String toString(){
+        String cadena;
+        return cadena = "Titulo: "+titulo+"\n Autor: "+ autor+"\n Año: "+año+"\n Editorial: "+editorial;
+    }
     
     
     
