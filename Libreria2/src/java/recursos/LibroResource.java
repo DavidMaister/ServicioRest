@@ -7,6 +7,7 @@ package recursos;
 
 
 
+import java.util.ArrayList;
 import javax.ejb.Stateless;
 import static javax.swing.text.html.FormSubmitEvent.MethodType.*;
 import javax.ws.rs.*;
@@ -20,38 +21,37 @@ import javax.ws.rs.core.Response;
  */
 
 @Stateless
-@Path("/libreria")
+@Path("/libreria2")
 public class LibroResource {
     
-    Libro libro;
+    ArrayList<Libro> libros = new ArrayList();
+  
     @GET
-    @Produces(MediaType.APPLICATION_XML)
-    public Libro consultar(){
-        return libro;
+    @Produces({MediaType.APPLICATION_XML})
+    public Libro consultar(@QueryParam("posicion") int posicion){
+        return libros.get(posicion);
     }
 
     @POST
-    @Consumes(MediaType.APPLICATION_XML)
+    @Consumes({MediaType.APPLICATION_XML})
     public String añadir(Libro nuevoLibro){
-        libro = nuevoLibro;
-                    
+        libros.add(nuevoLibro);           
         return "Datos guardados";
     }
     
     
     @PUT
-    @Consumes(MediaType.APPLICATION_XML)
-    public String modificar(Libro nuevoLibro){
-        libro = nuevoLibro;
+    @Consumes({MediaType.APPLICATION_XML})
+    public String modificar(@QueryParam("posicion") int pos, Libro nuevoLibro){
+        libros.add(pos, nuevoLibro);
                     
         return "Datos modificados";
     }
     
     @DELETE
-    @Path("/libreria")
-    @Produces(MediaType.APPLICATION_XML)
-    public String borrar(){
-        libro.borrar();
+    @Produces({MediaType.APPLICATION_XML})
+    public String borrar(@QueryParam("posicion") int pos){
+        libros.remove(pos);
         return "Borrado";
     }
     
