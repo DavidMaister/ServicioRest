@@ -36,23 +36,26 @@ public class LibroResource {
     @Consumes({MediaType.APPLICATION_XML})
     public String añadir(Libro nuevoLibro){
         libros.add(nuevoLibro);           
-        return "Datos guardados";
+        return "Libro guardado en la posicion "+(libros.size() - 1);
     }
     
     
     @PUT
     @Consumes({MediaType.APPLICATION_XML})
-    public String modificar(@QueryParam("posicion") int pos, Libro nuevoLibro){
-        libros.add(pos, nuevoLibro);
-                    
-        return "Datos modificados";
+    public String modificar( Libro nuevoLibro, @QueryParam("posicion") int pos){
+        libros.get(pos).setAutor(nuevoLibro.getAutor());
+        libros.get(pos).setTitulo(nuevoLibro.getTitulo());
+        libros.get(pos).setAño(nuevoLibro.getAño());
+        libros.get(pos).setEditorial(nuevoLibro.getEditorial());
+        
+        return "Datos modificados del libro en la posicion "+pos;
     }
     
     @DELETE
     @Produces({MediaType.APPLICATION_XML})
     public String borrar(@QueryParam("posicion") int pos){
         libros.remove(pos);
-        return "Borrado";
+        return "Borrado el libro de la posicion "+pos;
     }
     
     
